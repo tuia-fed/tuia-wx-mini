@@ -1,7 +1,7 @@
 # 推啊小程序媒体对接
 
 ## 产品介绍
-![产品介绍](https://github.com/tuia-fed/tuia-ali-mini/blob/master/images/public.png)
+![产品介绍](./img/public.png)
 
 ## 类型一：跳转到推啊小程序
 
@@ -21,7 +21,7 @@
 
   `pages/activity/index`
 
-- 跳转时需要携带的参数
+- 跳转时需要携带的参数 **<font color="red">具体参考《推啊媒体API对接文档2.1.4版 》</font>**
 
   |  参数名称   | 参数定义  |  是否必传  |
   |  ----  | ----  |  ----  |
