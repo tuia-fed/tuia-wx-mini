@@ -35,10 +35,24 @@
         title: '页面加载中...'
       })
 
-      const appKey = '' // your appKey
-      const adslotId = '' // your adslotId
+      const params = {
+        appKey: '', // your appKey
+        adslotId: '', // your adslotId
+        device_id: '', // 用户设备ID Andriod:imei;iOS:idfa
+        userId: '', // 用户唯一标识
+      }
+      function serialize(obj) {
+        return Object.keys(obj)
+          .map((key) =>
+            obj[key] === null || obj[key] === undefined
+              ? ''
+              : key + '=' + obj[key]
+          )
+          .join('&');
+      }
+
       this.setData({
-        url: `https://engine.aoclia.com/index/activity?appKey=${appKey}&adslotId=${adslotId}`
+        url: `https://engine.aoclia.com/index/activity?${serialize(params)}`
       })
     },
     loadError(e) {
@@ -81,6 +95,8 @@
   |  ----  | ----  |  ----  |
   | appKey  | 媒体的Key（从推啊媒体平台获取） |  必传  |
   | adslotId  | 广告位id（从推啊媒体平台获取） |  必传  |
+  | userId  | 当前用户在媒体系统的唯一标识符（不能含特殊字符如<,%） |  必传  |
+  | device_id  | 当前用户设备号，Andriod: imei, Ios: idfa(不能含特殊字符如<,%） |  保留字段，非必传  |
 
   > 注意：
 
@@ -92,6 +108,8 @@
   const params = {
     appKey: '', // your appKey
     adslotId: '', // your adslotId
+    device_id: '', // 用户设备ID Andriod:imei;iOS:idfa
+    userId: '', // 用户唯一标识
   }
   function serialize(obj) {
     return Object.keys(obj)
