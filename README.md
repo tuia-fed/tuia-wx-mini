@@ -1,9 +1,63 @@
 # 推啊小程序媒体对接
 
-## 产品介绍
-![产品介绍](./img/public.png)
+<!-- ## 产品介绍
+![产品介绍](/tuia-fed/tuia-wx-mini/blob/master/img/public.png) -->
 
-## 类型一：跳转到推啊小程序
+## 类型一：使用WebView组件打开推啊互动广告
+
+### 业务域名添加
+
+推啊业务域名：
+- https://engine.aoclia.com
+- https://tui.yiyhua.cn
+
+为保证WebView组件能够打开推啊域名，须添加小程序信任文件到推啊业务服务器，以及将推啊业务域名添加进小程序业务域名中。
+
+![信任文件下载](/tuia-fed/tuia-wx-mini/blob/master/img/img1.png)
+
+![添加业务域名](/tuia-fed/tuia-wx-mini/blob/master/img/img2.png)
+
+### 基础实现代码样例
+- wxml
+  ```html
+  <view>
+    <web-view src="{{url}}" binderror="loadError" bindload="loadSuccess" />
+  </view>
+  ```
+- js
+  ```javascript
+  Page({
+    data: {
+      url: '',
+    },
+    onLoad(options) {
+      wx.showLoading({
+        title: '页面加载中...'
+      })
+
+      const appKey = '' // your appKey
+      const adslotId = '' // your adslotId
+      this.setData({
+        url: `https://engine.aoclia.com/index/activity?appKey=${appKey}&adslotId=${adslotId}`
+      })
+    },
+    loadError(e) {
+      console.error(e)
+      wx.hideLoading()
+    },
+    loadSuccess(e) {
+      console.log(e)
+      wx.hideLoading()
+    }
+  })
+  ```
+
+### 测试
+
+对接完成后请体验整个广告流程（WebView 打开推啊活动 -> 参加活动 -> 点击各类券 -> 进入落地页），如反复检验后仍有问题请联系推啊开发
+
+
+## 类型二：跳转到推啊小程序
 
 ### 对接流程
 
@@ -76,59 +130,6 @@
   ```
   具体用法可以参见[wx.navigateToMiniProgram](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/miniprogram-navigate/wx.navigateToMiniProgram.html)
 
-
-## 类型二：使用WebView组件打开推啊互动广告
-
-### 业务域名添加
-
-推啊业务域名：
-- https://engine.aoclia.com
-- https://tui.yiyhua.cn
-
-为保证WebView组件能够打开推啊域名，须添加小程序信任文件到推啊业务服务器，以及将推啊业务域名添加进小程序业务域名中。
-
-![信任文件下载](./img/img1.png)
-
-![添加业务域名](./img/img2.png)
-
-### 基础实现代码样例
-- wxml
-  ```html
-  <view>
-    <web-view src="{{url}}" binderror="loadError" bindload="loadSuccess" />
-  </view>
-  ```
-- js
-  ```javascript
-  Page({
-    data: {
-      url: '',
-    },
-    onLoad(options) {
-      wx.showLoading({
-        title: '页面加载中...'
-      })
-
-      const appKey = '' // your appKey
-      const adslotId = '' // your adslotId
-      this.setData({
-        url: `https://engine.aoclia.com/index/activity?appKey=${appKey}&adslotId=${adslotId}`
-      })
-    },
-    loadError(e) {
-      console.error(e)
-      wx.hideLoading()
-    },
-    loadSuccess(e) {
-      console.log(e)
-      wx.hideLoading()
-    }
-  })
-  ```
-
-### 测试
-
-对接完成后请体验整个广告流程（WebView 打开推啊活动 -> 参加活动 -> 点击各类券 -> 进入落地页），如反复检验后仍有问题请联系推啊开发
 
 ## 修订记录
 
