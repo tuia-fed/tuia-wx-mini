@@ -24,7 +24,7 @@
     <web-view src="{{url}}" binderror="loadError" bindload="loadSuccess" />
   </view>
   ```
-- js
+- 方式一：js（通过appKey和adslotId方式打开）
   ```javascript
   Page({
     data: {
@@ -36,10 +36,10 @@
       })
 
       const params = {
-        appKey: '', // your appKey
-        adslotId: '', // your adslotId
-        device_id: '', // 用户设备ID Andriod:imei;iOS:idfa
-        userId: '', // 用户唯一标识
+        appKey: '', // 必传 your appKey
+        adslotId: '', // 非必传 your adslotId
+        device_id: '', // 非必传 用户设备ID Andriod:imei;iOS:idfa
+        userId: '', // 非必传 用户唯一标识（涉及虚拟奖品发放时需要传）
       }
       function serialize(obj) {
         return Object.keys(obj)
@@ -53,6 +53,33 @@
 
       this.setData({
         url: `https://engine.aoclia.com/index/activity?${serialize(params)}`
+      })
+    },
+    loadError(e) {
+      console.error(e)
+      wx.hideLoading()
+    },
+    loadSuccess(e) {
+      console.log(e)
+      wx.hideLoading()
+    }
+  })
+  ```
+- 方式二：js（通过媒体后台获取URL方式）
+URL类似如下：
+https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
+```javascript
+  Page({
+    data: {
+      url: '',
+    },
+    onLoad(options) {
+      wx.showLoading({
+        title: '页面加载中...'
+      })
+
+      this.setData({
+        url: `https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId`
       })
     },
     loadError(e) {
@@ -95,7 +122,7 @@
   |  ----  | ----  |  ----  |
   | appKey  | 媒体的Key（从推啊媒体平台获取） |  必传  |
   | adslotId  | 广告位id（从推啊媒体平台获取） |  必传  |
-  | userId  | 当前用户在媒体系统的唯一标识符（不能含特殊字符如<,%） |  必传  |
+  | userId  | 当前用户在媒体系统的唯一标识符（不能含特殊字符如<,%） |  非必传（涉及虚拟奖品发放时需要传）  |
   | device_id  | 当前用户设备号，Andriod: imei, Ios: idfa(不能含特殊字符如<,%） |  保留字段，非必传  |
 
   > 注意：
@@ -106,10 +133,10 @@
 ### 基础实现代码样例
   ```javascript
   const params = {
-    appKey: '', // your appKey
-    adslotId: '', // your adslotId
-    device_id: '', // 用户设备ID Andriod:imei;iOS:idfa
-    userId: '', // 用户唯一标识
+    appKey: '', // 必传 your appKey
+    adslotId: '', // 必传 your adslotId
+    device_id: '', // 非必传 用户设备ID Andriod:imei;iOS:idfa
+    userId: '', // 非必传 用户唯一标识（涉及虚拟奖品发放时需要传）
   }
   function serialize(obj) {
     return Object.keys(obj)
@@ -154,3 +181,4 @@
 | 编号 | 内容 | 修订时间 | 影响范围 |
 | :--- | :---: | :---: | :--: |
 | 1 | Beta版 | 2020-06-23 | - |
+| 2 | Release | 2020-07-17 | - |
