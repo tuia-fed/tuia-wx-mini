@@ -211,14 +211,10 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
 {"data":true,"success":true}
 ```
 
-|  参数名称   | 参数定义  |  是否必传  |
-|  ----  | ----  |  ----  |
-| advertKey  | 广告主的Key（从推啊广告平台获取） |  是  |
-
 
 ### 2、落地页转化数据回传接口
 
-用于广告主回传落地页转化数据埋点
+> 用于广告主回传落地页转化数据埋点
 
 请求url：https://activity.tuia.cn/log/effect/wechatCard
 
