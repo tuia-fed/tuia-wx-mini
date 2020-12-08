@@ -261,35 +261,36 @@ onShow(params) {
 },
 // 核销
 consumeCard(wechatCode) {
-  this.post('https://activity.tuia.cn/weixin/consumeCard/callback', {
+  this.ajax('https://activity.tuia.cn/weixin/consumeCard/callback', {
     wechatCode
   })
 },
 // 页面曝光
 exposure1(wechatCode) {
-  this.post('https://activity.tuia.cn/log/effect/wechatCard', {
+  this.ajax('https://activity.tuia.cn/log/effect/wechatCard', {
     wechatCode,
     type: 1
   })
 },
 // 填表完成
 exposure2(wechatCode) {
-  this.post('https://activity.tuia.cn/log/effect/wechatCard', {
+  this.ajax('https://activity.tuia.cn/log/effect/wechatCard', {
     wechatCode,
     type: 2
   })
 },
 // 支付完成
 exposure3(wechatCode) {
-  this.post('https://activity.tuia.cn/log/effect/wechatCard', {
+  this.ajax('https://activity.tuia.cn/log/effect/wechatCard', {
     wechatCode,
     type: 3
   })
 },
 // 上报数据的工具函数封装，开发者自行处理
-post(url, data) {
-  ajax.post(url, {
-    data: {
+ajax(url, data) {
+  // 如果使用post请求，需要表单提交
+  http.get(url, {
+    params: {
       advertKey: '推啊广告秘钥，自行申请',
       timestamp: Date.now(),
       ...data
