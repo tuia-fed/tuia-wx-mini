@@ -256,6 +256,7 @@ onShow(params) {
   if (encrypt_code) {
     // 发起核销
     this.consumeCard(encrypt_code)
+    this.exposure1(encrypt_code)
   }
 },
 // 核销
@@ -265,21 +266,21 @@ consumeCard(wechatCode) {
   })
 },
 // 页面曝光
-exposure(wechatCode) {
+exposure1(wechatCode) {
   this.post('https://activity.tuia.cn/log/effect/wechatCard', {
     wechatCode,
     type: 1
   })
 },
 // 填表完成
-exposure(wechatCode) {
+exposure2(wechatCode) {
   this.post('https://activity.tuia.cn/log/effect/wechatCard', {
     wechatCode,
     type: 2
   })
 },
 // 支付完成
-exposure(wechatCode) {
+exposure3(wechatCode) {
   this.post('https://activity.tuia.cn/log/effect/wechatCard', {
     wechatCode,
     type: 3
