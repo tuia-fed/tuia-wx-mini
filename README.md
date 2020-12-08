@@ -176,9 +176,74 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
   具体用法可以参见[wx.navigateToMiniProgram](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/miniprogram-navigate/wx.navigateToMiniProgram.html)
 
 
-## 修订记录
+# 广告主对接文档
 
-| 编号 | 内容 | 修订时间 | 影响范围 |
-| :--- | :---: | :---: | :--: |
-| 1 | Beta版 | 2020-06-23 | - |
-| 2 | Release | 2020-07-17 | - |
+> 面向小程序广告主，上报数据使用
+
+## 接口
+
+### 微信卡券核销接口
+
+> 用于用户核销微信卡券时广告主回调使用
+
+请求url：https://activity.tuia.cn/weixin/consumeCard/callback
+
+请求方式：GET或者POST
+
+请求参数：
+
+| 字段名称   | 数据类型 | 是否必传 | 说明         |
+| ---------- | -------- | -------- | ------------ |
+| advertKey  | string   | 是       | 推啊广告秘钥 |
+| wechatCode | string   | 是       | 微信卡券code |
+| timestamp  | string   | 是       | 时间戳（ms） |
+
+响应参数：
+
+| 字段名称 | 数据类型 | 是否必传 | 说明                              |
+| -------- | -------- | -------- | --------------------------------- |
+| data     | boolean  | 是       | 响应数据                          |
+| success  | boolean  | 是       | 响应状态，true：成功，false：失败 |
+
+示例：
+
+```json
+{"data":true,"success":true}
+```
+
+|  参数名称   | 参数定义  |  是否必传  |
+|  ----  | ----  |  ----  |
+| advertKey  | 广告主的Key（从推啊广告平台获取） |  是  |
+
+
+### 2、落地页转化数据回传接口
+
+用于广告主回传落地页转化数据埋点
+
+请求url：https://activity.tuia.cn/log/effect/wechatCard
+
+请求方式：GET或者POST
+
+请求参数：
+
+| 字段名称   | 数据类型 | 是否必传 | 说明                                                |
+| ---------- | -------- | -------- | --------------------------------------------------- |
+| advertKey  | string   | 是       | 推啊广告秘钥                                        |
+| wechatCode | string   | 是       | 微信卡券code                                        |
+| type       | int      | 是       | 转化数据类型，1、落地页曝光 2、填表状态 3、支付状态 |
+
+响应参数：
+
+| 字段名称 | 数据类型 | 是否必传 | 说明       |
+| -------- | -------- | -------- | ---------- |
+| redesc   | string   | 是       | 错误描述   |
+| record   | string   | 是       | 错误码     |
+| a_old    | String   | 是       | 推啊订单id |
+
+示例：
+
+```json
+{"redesc":"成功","record":"0000000","a_oId":"taw-123"}
+```
+
+注意：只有在 a_oId 有效的情况下才会返回 a_oId 字段，测试情况或者 a_oId 无效时则不返回。 
