@@ -182,7 +182,7 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
 
 ## 接口
 
-### 微信卡券核销接口
+### 1、微信卡券核销接口
 
 > 用于用户核销微信卡券时广告主回调使用
 
@@ -243,3 +243,56 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
 ```
 
 注意：只有在 a_oId 有效的情况下才会返回 a_oId 字段，测试情况或者 a_oId 无效时则不返回。 
+
+## Demo
+
+> 示例代码用于小程序前端进行数据上报，后端上报同理
+
+```javascript
+// 在小程序的onShow生命周期发起核销操作
+onShow(params) {
+  // 该参数就是wechatCode
+  const encrypt_code = params.encrypt_code
+  if (encrypt_code) {
+    // 发起核销
+    this.consumeCard(encrypt_code)
+  }
+},
+// 核销
+consumeCard(wechatCode) {
+  this.post('https://activity.tuia.cn/weixin/consumeCard/callback', {
+    wechatCode
+  })
+},
+// 页面曝光
+exposure(wechatCode) {
+  this.post('https://activity.tuia.cn/log/effect/wechatCard', {
+    wechatCode,
+    type: 1
+  })
+},
+// 填表完成
+exposure(wechatCode) {
+  this.post('https://activity.tuia.cn/log/effect/wechatCard', {
+    wechatCode,
+    type: 2
+  })
+},
+// 支付完成
+exposure(wechatCode) {
+  this.post('https://activity.tuia.cn/log/effect/wechatCard', {
+    wechatCode,
+    type: 3
+  })
+},
+// 上报数据的工具函数封装，开发者自行处理
+post(url, data) {
+  ajax.post(url, {
+    data: {
+      advertKey: '推啊广告秘钥，自行申请',
+      timestamp: Date.now(),
+      ...data
+    }
+  })
+}
+```
