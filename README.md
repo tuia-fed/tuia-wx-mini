@@ -200,7 +200,6 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
 {
   "pages": [
     "pages/tuia/index"
-  ]
   ],
 }
 ```
