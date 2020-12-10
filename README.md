@@ -209,6 +209,7 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
 媒体小程序正常发布之后，推啊的活动就可以正常发放小程序的广告了。   
 体验流程：用户参与活动，用户点击弹层，如果是小程序广告，则打开中转页，用户在中转页发生点击行为，跳转到对应的广告小程序
 
+![体验流程](./img/8FE5CAC1-41FD-4913-9DD4-3CAB3D2D5A4B.png)
 
 # 广告主对接文档
 
