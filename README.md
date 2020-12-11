@@ -204,6 +204,12 @@ https://engine.aoclia.com/index/activity?appKey=appKey&adslotId=adslotId
 }
 ```
 
+## 配置服务器域名
+
+在媒体小程序管理后台服务器域名中添加downloadFile合法域名（推啊通过wx.getImageInfo接口来发送埋点信息）
+
+![downloadFile合法域名](./img/096CF477-43C4-4FC0-B602-50AC881B6E6F.png)
+
 ## 小程序发布
 
 媒体小程序正常发布之后，推啊的活动就可以正常发放小程序的广告了。   
