@@ -1,5 +1,7 @@
 # 推啊小程序媒体对接
 
+为了更好的用户体验，文档迁移至 [gitee](https://gitee.com/TFED/wechat-mini-app)
+
 <!-- ## 产品介绍
 ![产品介绍](./img/public.png) -->
 
